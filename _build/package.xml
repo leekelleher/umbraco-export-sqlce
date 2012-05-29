@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+	<files />
+	<info>
+		<package>
+			<name>Export SQL Server Compact</name>
+			<version>0.1.0</version>
+			<license url="http://www.opensource.org/licenses/mit-license.php">MIT license</license>
+			<url>http://our.umbraco.org/projects/backoffice-extensions/export-sql-server-compact</url>
+			<requirements>
+				<major>4</major>
+				<minor>6</minor>
+				<patch>1</patch>
+			</requirements>
+		</package>
+		<author>
+			<name>Lee Kelleher, Rich Green</name>
+			<website>http://our.umbraco.org/people</website>
+		</author>
+		<readme><![CDATA[]]></readme>
+	</info>
+	<DocumentTypes />
+	<Templates />
+	<Stylesheets />
+	<Macros />
+	<DictionaryItems />
+	<Languages />
+	<DataTypes />
+	<Actions>
+		<Action runat="install" alias="addDashboardSection" dashboardAlias="ExportSqlCE">
+			<section alias="ExportSqlCE">
+				<areas>
+					<area>developer</area>
+				</areas>
+				<tab caption="Export SQL Server Compact">
+					<control addPanel="true" panelCaption="">/umbraco/plugins/ExportSqlCE/Dashboard.ascx</control>
+				</tab>
+			</section>
+		</Action>
+	</Actions>
+	<control />
+</umbPackage>
