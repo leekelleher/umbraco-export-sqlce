@@ -66,7 +66,7 @@ namespace Our.Umbraco.Dashboard.ExportSqlCE.Web
 					var datestamp = DateTime.UtcNow.ToString("_yyyyMMddHHmmss");
 					var fileInfo = new FileInfo(sqlcePath);
 					var originalFileName = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
-					var exportFileName = string.Concat(originalFileName, datestamp, ".sqlce");
+					var exportFileName = string.Concat(originalFileName, datestamp, ".sql");
 					var exportPath = Server.MapPath("~/App_Data/" + exportFileName);
 					var tempPath = sqlcePath.Replace(fileInfo.Extension, string.Concat(datestamp, fileInfo.Extension));
 
