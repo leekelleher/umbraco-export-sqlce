@@ -37,16 +37,20 @@
   <ItemGroup>
     <Reference Include="businesslogic">
       <HintPath>..\_externals\businesslogic.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="cms">
       <HintPath>..\_externals\cms.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_externals\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="interfaces">
       <HintPath>..\_externals\interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ISqlCeScripting">
       <HintPath>..\_externals\ISqlCeScripting.dll</HintPath>
@@ -64,6 +68,7 @@
     <Reference Include="System.Web" />
     <Reference Include="umbraco">
       <HintPath>..\_externals\umbraco.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
