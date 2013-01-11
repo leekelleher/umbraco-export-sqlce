@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <umbPackage>
-	<files />
 	<info>
 		<package>
 			<name>Export SQL Server Compact</name>
@@ -39,4 +38,5 @@
 		</Action>
 	</Actions>
 	<control />
+	<files />
 </umbPackage>

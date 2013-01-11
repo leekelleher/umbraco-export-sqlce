@@ -8,6 +8,7 @@
 	<!-- PROPERTIES -->
 	<PropertyGroup>
 		<PackageVersion>2.0.0</PackageVersion>
+		<UmbracoVersion>4.8.0</UmbracoVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -69,9 +70,9 @@
 		</ReadLinesFromFile>
 		<ManifestUpdate ManifestFile="$(BuildDir)\package.xml"
 			WorkingDirectory="$(BuildDir)"
-			MinimumRequiredUmbracoVersion="4.8.0"
+			MinimumRequiredUmbracoVersion="$(UmbracoVersion)"
 			PackageVersion="$(PackageVersion)"
-			Readme="@(Readme->'%(Identity)', '%0a%0d')"
+			Readme="$([System.IO.File]::ReadAllText(readme.txt))"
 			Files="@(ManifestFiles)" />
 	</Target>
 
