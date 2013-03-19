@@ -19,23 +19,24 @@ namespace Our.Umbraco.Dashboard.ExportSqlCE.Web
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!IsPostBack)
+			if (IsPostBack)
+				return;
+
+			var builder = new DbConnectionStringBuilder() { ConnectionString = GlobalSettings.DbDSN };
+			if (builder.ContainsKey("datalayer"))
 			{
-				var builder = new DbConnectionStringBuilder() { ConnectionString = GlobalSettings.DbDSN };
-				if (builder.ContainsKey("datalayer"))
+				var dataLayer = builder["datalayer"].ToString();
+
+				if (string.Equals(dataLayer, "SQLCE4Umbraco.SqlCEHelper,SQLCE4Umbraco", StringComparison.OrdinalIgnoreCase))
 				{
-					var dataLayer = builder["datalayer"].ToString();
-
-					if (string.Equals(dataLayer, "SQLCE4Umbraco.SqlCEHelper,SQLCE4Umbraco", StringComparison.OrdinalIgnoreCase))
-					{
-						this.ltrlFileName.Text = builder["data source"].ToString();
-						this.phForm.Visible = true;
-						return;
-					}
+					var sqlcePath = builder.ContainsKey("datasource") ? builder["datasource"].ToString() : builder["data source"].ToString();
+					this.ltrlFileName.Text = sqlcePath;
+					this.phForm.Visible = true;
+					return;
 				}
-
-				this.phError.Visible = true;
 			}
+
+			this.phError.Visible = true;
 		}
 
 		protected void btnExport_Click(object sender, EventArgs e)
@@ -49,12 +50,16 @@ namespace Our.Umbraco.Dashboard.ExportSqlCE.Web
 				{
 					builder.Remove("datalayer");
 
-					var sqlcePath = builder["data source"].ToString();
+					var sqlcePath = builder.ContainsKey("datasource") ? builder["datasource"].ToString() : builder["data source"].ToString();
 
 					// resolve the 'DataDirectory'
 					if (builder.ConnectionString.Contains("|DataDirectory|"))
 					{
 						var dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+
+						if (!dataDirectory.EndsWith("\\"))
+							dataDirectory = string.Concat(dataDirectory, "\\");
+
 						sqlcePath = sqlcePath.Replace("|DataDirectory|", dataDirectory);
 					}
 
@@ -70,13 +75,18 @@ namespace Our.Umbraco.Dashboard.ExportSqlCE.Web
 					var exportPath = Server.MapPath("~/App_Data/" + exportFileName);
 					var tempPath = sqlcePath.Replace(fileInfo.Extension, string.Concat(datestamp, fileInfo.Extension));
 
-					// System.IO.Path.GetFileName
-
 					// make a copy of the db
 					File.Copy(sqlcePath, tempPath);
 
 					// replace the conn string
-					builder["data source"] = tempPath;
+					if (builder.ContainsKey("datasource"))
+					{
+						builder["datasource"] = tempPath;
+					}
+					else
+					{
+						builder["data source"] = tempPath;
+					}
 
 					// export db
 					using (var repository = new DB4Repository(builder.ConnectionString))
