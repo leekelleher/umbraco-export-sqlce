@@ -17,6 +17,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,19 +55,34 @@
       <HintPath>..\_externals\interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ISqlCeScripting">
-      <HintPath>..\_externals\ISqlCeScripting.dll</HintPath>
+    <Reference Include="ISqlCeScripting, Version=3.5.2.15, Culture=neutral, PublicKeyToken=3681435cabd17ad2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ErikEJ.SqlCeScripting.3.5.2.26\lib\net\ISqlCeScripting.dll</HintPath>
     </Reference>
-    <Reference Include="SqlCeScripting, Version=3.5.2.0, Culture=neutral, PublicKeyToken=3681435cabd17ad2, processorArchitecture=MSIL">
-      <HintPath>..\_externals\SqlCeScripting.dll</HintPath>
+    <Reference Include="QuickGraph">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
-    <Reference Include="SqlCeScripting40">
-      <HintPath>..\_externals\SqlCeScripting40.dll</HintPath>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlCeScripting40, Version=3.5.2.15, Culture=neutral, PublicKeyToken=f411b7eab4d5c1c5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ErikEJ.SqlCeScripting.3.5.2.26\lib\net\SqlCeScripting40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="umbraco">
       <HintPath>..\_externals\umbraco.dll</HintPath>
@@ -83,7 +100,9 @@
       <DependentUpon>Dashboard.ascx.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Web\Dashboard.ascx">
       <SubType>ASPXCodeBehind</SubType>
@@ -97,6 +116,17 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "C:\VCS\Umbraco\Community\Our.Umbraco.Dashboard.ExportSqlCE\Our.Umbraco.Dashboard.ExportSqlCE\bin\Debug\Our.Umbraco.*" "C:\VCS\Umbraco\Version\6.0.3\bin\" /y
+XCOPY "C:\VCS\Umbraco\Community\Our.Umbraco.Dashboard.ExportSqlCE\Our.Umbraco.Dashboard.ExportSqlCE\bin\Debug\*SqlCeScripting*.dll" "C:\VCS\Umbraco\Version\6.0.3\bin\" /y
+XCOPY "C:\VCS\Umbraco\Community\Our.Umbraco.Dashboard.ExportSqlCE\Our.Umbraco.Dashboard.ExportSqlCE\Web\*.ascx" "C:\VCS\Umbraco\Version\6.0.3\umbraco\plugins\ExportSqlCE\" /y
+XCOPY "C:\VCS\Umbraco\Community\Our.Umbraco.Dashboard.ExportSqlCE\Our.Umbraco.Dashboard.ExportSqlCE\Web\*.png" "C:\VCS\Umbraco\Version\6.0.3\umbraco\plugins\ExportSqlCE\" /y
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
