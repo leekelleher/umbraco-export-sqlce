@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="Dashboard.ascx.cs" Inherits="Our.Umbraco.Dashboard.ExportSqlCE.Web.Dashboard" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.ascx.cs" Inherits="Our.Umbraco.Dashboard.ExportSqlCE.Web.Dashboard" %>
 
 <div class="dashboardWrapper">
 	<h2>Export SQL Server Compact</h2>
