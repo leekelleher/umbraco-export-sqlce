@@ -18,13 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Assemblies", "Exte
 		_externals\ICSharpCode.SharpZipLib.dll = _externals\ICSharpCode.SharpZipLib.dll
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL CE Scripting", "SQL CE Scripting", "{0D3597E4-05C3-4D1D-9AD6-E2F512860B18}"
-	ProjectSection(SolutionItems) = preProject
-		_externals\ISqlCeScripting.dll = _externals\ISqlCeScripting.dll
-		_externals\SqlCeScripting.dll = _externals\SqlCeScripting.dll
-		_externals\SqlCeScripting40.dll = _externals\SqlCeScripting40.dll
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Umbraco", "Umbraco", "{0E8F4496-A1C5-4825-9523-C0B889DC6307}"
 	ProjectSection(SolutionItems) = preProject
 		_externals\businesslogic.dll = _externals\businesslogic.dll
@@ -57,7 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{57F4FCA9-BDE1-4129-86C7-467D8FB694E9} = {79DDC34B-A31A-4016-8545-EEC4DC70F57A}
 		{38D3A189-FAA8-47AF-B6EE-52203D773FB0} = {79DDC34B-A31A-4016-8545-EEC4DC70F57A}
-		{0D3597E4-05C3-4D1D-9AD6-E2F512860B18} = {38D3A189-FAA8-47AF-B6EE-52203D773FB0}
+		{47565B96-046C-4600-BF5D-BCB8A8105842} = {79DDC34B-A31A-4016-8545-EEC4DC70F57A}
 		{0E8F4496-A1C5-4825-9523-C0B889DC6307} = {38D3A189-FAA8-47AF-B6EE-52203D773FB0}
 	EndGlobalSection
 EndGlobal
