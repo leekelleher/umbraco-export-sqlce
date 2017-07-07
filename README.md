@@ -1,5 +1,7 @@
 # Export SQL Server Compact
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 This package adds a dashboard control to the Developer section, allowing you to script schema and data from a SQLCE database to a .sql file.
 
 ## Installation
